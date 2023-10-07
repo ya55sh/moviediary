@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import MovieList from "./components/MovieList";
+import Navbar from "./components/Navbar";
+
+const initialData = [
+  { img: "image here", name: "Inception", year: 2010 },
+  { img: "image here", name: "Transformer", year: 2010 },
+  { img: "image here", name: "G.I. Joe", year: 2010 },
+  { img: "image here", name: "Clash of the Titans", year: 2010 },
+  { img: "image here", name: "Incredible Hulk", year: 2010 },
+];
+
+const watchedMovies = [
+  { img: "image here", name: "Inception", year: 2010 },
+  { img: "image here", name: "Transformer", year: 2010 },
+  { img: "image here", name: "G.I. Joe", year: 2010 },
+];
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar />
+      <div className="container">
+        <MovieList movieList={initialData} watchedMovies={watchedMovies} />
+      </div>
+    </>
   );
 }
 
