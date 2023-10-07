@@ -1,7 +1,7 @@
-export default function Result() {
+export default function Result({ result }) {
   return (
     <span>
-      <h3>Found X results</h3>
+      <h3>Found {result} movies</h3>
     </span>
   );
 }

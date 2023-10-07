@@ -1,15 +1,13 @@
 export default function Movie({ movieList }) {
   return (
-    <div class="movies">
-      <ul>
-        {movieList.map((movie) => {
-          return (
-            <li>
-              {movie.img} {movie.name} {movie.year}
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+    <ul>
+      {movieList.map((movie) => {
+        return (
+          <li key={movie.name}>
+            {movie.img} {movie.name} {movie.year}
+          </li>
+        );
+      })}
+    </ul>
   );
 }

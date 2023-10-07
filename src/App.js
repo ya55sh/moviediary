@@ -1,6 +1,12 @@
 import "./App.css";
-import MovieList from "./components/MovieList";
+import Logo from "./components/Logo";
+import Movie from "./components/Movie";
+import Main from "./components/Main";
 import Navbar from "./components/Navbar";
+import Result from "./components/Result";
+import SearchBar from "./components/SearchBar";
+import Watched from "./components/Watched";
+import Listing from "./components/Listing";
 
 const initialData = [
   { img: "image here", name: "Inception", year: 2010 },
@@ -19,10 +25,20 @@ const watchedMovies = [
 function App() {
   return (
     <>
-      <Navbar />
-      <div className="container">
-        <MovieList movieList={initialData} watchedMovies={watchedMovies} />
-      </div>
+      <Navbar>
+        <Logo />
+        <SearchBar />
+        <Result result={initialData.length} />
+      </Navbar>
+
+      <Main>
+        <Listing>
+          <Movie movieList={initialData} />
+        </Listing>
+        <Listing>
+          <Watched watchedMovies={watchedMovies} />
+        </Listing>
+      </Main>
     </>
   );
 }

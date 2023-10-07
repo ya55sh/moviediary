@@ -20,21 +20,37 @@
 }
 
 .movielist {
-  height: 600px;
+  margin: 30px auto;
+  width: 70%;
   display: flex;
   border-radius: 50px;
   color: white;
   font-size: 20px;
   flex-direction: row;
   justify-content: space-around;
-  width: 100%;
+  gap: 50px;
 }
 
-.movies {
+.listing {
+  width: 50%;
+  height: 900px;
+  margin: auto;
+  text-align: center;
+  padding: 8px;
+  border-radius: 24px;
+  position: relative;
   overflow-y: scroll;
   overflow-x: scroll;
-  border-radius: 12px;
-  height: 600px;
+  background-color: rgb(38, 38, 29);
+}
+
+.btnList {
+  background-color: rgb(160, 70, 235);
+  border: none;
+  border-radius: 8px;
+  padding: 4px;
+  position: absolute;
+  right: 5px;
 }
 
 .header {
@@ -43,30 +59,10 @@
   background-color: red;
 }
 
-.summary {
-  overflow-y: scroll;
-  overflow-x: scroll;
-  border-radius: 12px;
-  height: 600px;
-}
-
 ul {
   margin: 0px;
-  height: inherit;
-  background-color: rgb(66, 65, 65);
-  width: 400px;
   list-style: none;
-
-  padding-top: 30px;
-}
-
-.watchedList {
-  margin-top: 0px;
-  height: inherit;
-  background-color: rgb(66, 65, 65);
-  width: 400px;
-  list-style: none;
-  justify-self: center;
+  color: rgb(255, 255, 255);
   padding-top: 30px;
 }
 
