@@ -7,6 +7,12 @@ import Result from "./components/Result";
 import SearchBar from "./components/SearchBar";
 import Watched from "./components/Watched";
 import Listing from "./components/Listing";
+import { useEffect, useState } from "react";
+import Loading from "./components/Loading";
+import ErrorMessage from "./components/ErrorMessage";
+import Selected from "./components/Selected";
+
+let KEY = "7aa5e667";
 
 const initialData = [
   { img: "image here", name: "Inception", year: 2010 },
@@ -23,20 +29,82 @@ const watchedMovies = [
 ];
 
 function App() {
+  const [query, setQuery] = useState("Star wars");
+  const [movies, setMovies] = useState([]);
+  const [movie, setMovie] = useState("");
+  const [watched, setWatched] = useState([]);
+  const [selectedId, setSelectedId] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [isError, setError] = useState("");
+
+  function handleSelectedMovie() {
+    setSelectedId("");
+  }
+
+  // function handleWatched(newAddedMovie) {
+  //   console.log("running");
+  //   setWatched((watched) => [...watched, newAddedMovie]);
+  // }
+
+  useEffect(
+    function () {
+      setLoading(true);
+      setError("");
+      if (query !== "") {
+        fetch(`http://www.omdbapi.com/?apikey=${KEY}&s=${query}`)
+          .then((resp) => {
+            if (!resp.ok) throw Error("Request Failed");
+            return resp.json();
+          })
+          .then((data) => {
+            if (data.Response === "False") throw Error("Movie not found");
+            setMovies(data.Search);
+            setLoading(false);
+          })
+          .catch((error) => {
+            setError(error.message);
+            setLoading(false);
+          });
+      } else {
+        setMovies([]);
+        setLoading(false);
+      }
+    },
+    [query]
+  );
+
   return (
     <>
       <Navbar>
         <Logo />
-        <SearchBar />
-        <Result result={initialData.length} />
+        <SearchBar query={query} setQuery={setQuery} />
+        <Result result={movies.length ? movies.length : 0} />
       </Navbar>
 
       <Main>
         <Listing>
-          <Movie movieList={initialData} />
+          {loading && <Loading />}
+          {!loading && !isError && (
+            <Movie
+              movieList={movies}
+              setSelectedId={setSelectedId}
+              setMovie={setMovie}
+            />
+          )}
+          {isError && <ErrorMessage message={isError} />}
         </Listing>
         <Listing>
-          <Watched watchedMovies={watchedMovies} />
+          {selectedId !== "" ? (
+            <Selected
+              selectedId={selectedId}
+              setSelectedId={handleSelectedMovie}
+              movie={movie}
+              setMovie={setMovie}
+              setWatched={setWatched}
+            />
+          ) : (
+            <Watched watchedMovies={watchedMovies} />
+          )}
         </Listing>
       </Main>
     </>
