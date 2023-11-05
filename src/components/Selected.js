@@ -78,7 +78,7 @@ export default function Selected({
         <>
           <header>
             <img src={poster} alt={title} />
-            <div>
+            <div className="selected-details">
               <h2>{title}</h2>
               <p>
                 {released} &bull; {runtime}
