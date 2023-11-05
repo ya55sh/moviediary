@@ -36,15 +36,11 @@ function App() {
   const [selectedId, setSelectedId] = useState("");
   const [loading, setLoading] = useState(true);
   const [isError, setError] = useState("");
+  const [totalRating, setTotalRating] = useState(0);
 
   function handleSelectedMovie() {
     setSelectedId("");
   }
-
-  // function handleWatched(newAddedMovie) {
-  //   console.log("running");
-  //   setWatched((watched) => [...watched, newAddedMovie]);
-  // }
 
   useEffect(
     function () {
@@ -100,10 +96,13 @@ function App() {
               setSelectedId={handleSelectedMovie}
               movie={movie}
               setMovie={setMovie}
+              watched={watched}
               setWatched={setWatched}
+              totalRating={totalRating}
+              setTotalRating={setTotalRating}
             />
           ) : (
-            <Watched watchedMovies={watchedMovies} />
+            <Watched watchedMovies={watched} setSelectedId={setSelectedId} />
           )}
         </Listing>
       </Main>

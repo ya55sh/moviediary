@@ -8,11 +8,16 @@ export default function Selected({
   setSelectedId,
   movie,
   setMovie,
+  watched,
   setWatched,
+  totalRating,
+  setTotalRating,
 }) {
   const [loading, setLoading] = useState(true);
+  const [currentRating, setCurrentRating] = useState(0);
 
   const {
+    imdbID,
     Title: title,
     Year: year,
     Plot: plot,
@@ -22,7 +27,7 @@ export default function Selected({
     Director: director,
     Genre: genre,
     Poster: poster,
-    imdbRating: imdbRating,
+    imdbRating,
   } = movie;
 
   function onAddToWatched() {
@@ -32,10 +37,19 @@ export default function Selected({
       year,
       poster,
       runtime,
+      currentRating,
       imdbID: selectedId,
     };
-    console.log("running", currentmovie);
-    setWatched((watched) => [...watched, currentmovie]);
+
+    setWatched((watched) => {
+      let tempMovie = watched.find((item) => item.title === currentmovie.title);
+
+      if (tempMovie === undefined) return [...watched, currentmovie];
+      return watched;
+    });
+    setTimeout(() => {
+      setSelectedId("");
+    }, 200);
   }
 
   useEffect(() => {
@@ -75,7 +89,12 @@ export default function Selected({
           </header>
 
           <div className="star">
-            <StarRating maxRating={10} size={34} />
+            <StarRating
+              maxRating={10}
+              size={34}
+              currentRating={currentRating}
+              setCurrentRating={setCurrentRating}
+            />
             <button className="btnAddToWatched" onClick={onAddToWatched}>
               ➕ Add to watch list
             </button>

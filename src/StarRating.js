@@ -15,8 +15,10 @@ export default function StarRating({
   color = "#ff8000",
   size = 50,
   className = "",
+  currentRating,
+  setCurrentRating,
 }) {
-  const [rating, setRating] = useState(0);
+  // const [rating, setRating] = useState(0);
   const [tempRating, setTempRating] = useState(0);
 
   const textStyle = {
@@ -27,7 +29,8 @@ export default function StarRating({
   };
 
   function handleRating(rating) {
-    setRating(rating);
+    // setRating(rating);
+    setCurrentRating(rating);
   }
 
   function handleTempRating(rating) {
@@ -43,7 +46,7 @@ export default function StarRating({
               onRate={() => {
                 handleRating(i + 1);
               }}
-              empty={tempRating ? tempRating < i + 1 : rating < i + 1}
+              empty={tempRating ? tempRating < i + 1 : currentRating < i + 1}
               onHoverIn={() => {
                 handleTempRating(i + 1);
               }}
@@ -56,7 +59,7 @@ export default function StarRating({
           </span>
         ))}
       </div>
-      <p style={textStyle}>{tempRating || rating || ""}</p>
+      <p style={textStyle}>{tempRating || currentRating || ""}</p>
     </div>
   );
 }

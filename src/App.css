@@ -63,9 +63,14 @@
 }
 
 .header {
+  display: flex;
   height: 80px;
   border-radius: 12px;
-  background-color: red;
+  padding: 12px;
+  background-color: #5c5c5c;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: flex-start !important;
 }
 
 ul {
@@ -175,4 +180,10 @@ section p:nth-child(3) {
   font-size: 18px;
   border: 2px solid white;
   cursor: pointer;
+  box-shadow: 1px 2px #999;
+}
+
+.btnAddToWatched:hover {
+  color: #1d2f37;
+  background-color: white;
 }
