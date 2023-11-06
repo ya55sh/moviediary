@@ -1,4 +1,12 @@
-export default function Card({ poster, title, year, runtime, rating }) {
+export default function Card({
+  poster,
+  title,
+  year,
+  runtime,
+  rating,
+  id,
+  handleRemoveMovie,
+}) {
   return (
     <div className="card">
       <img src={poster} alt={title} />
@@ -11,6 +19,16 @@ export default function Card({ poster, title, year, runtime, rating }) {
           </p>
         )}
       </div>
+      {rating !== undefined && (
+        <span
+          onClick={() => {
+            console.log(id);
+            handleRemoveMovie(id);
+          }}
+        >
+          ❎
+        </span>
+      )}
     </div>
   );
 }

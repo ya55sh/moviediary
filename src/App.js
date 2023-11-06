@@ -102,7 +102,7 @@ function App() {
               setTotalRating={setTotalRating}
             />
           ) : (
-            <Watched watchedMovies={watched} setSelectedId={setSelectedId} />
+            <Watched watchedMovies={watched} setWatchedMovies={setWatched} />
           )}
         </Listing>
       </Main>

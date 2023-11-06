@@ -1,20 +1,28 @@
 import { useEffect, useState } from "react";
 import Card from "./Card";
 
-export default function Watched({ watchedMovies }) {
+export default function Watched({ watchedMovies, setWatchedMovies }) {
+  // const [removeMovie, setremoveMovie] = useState;
+
   const [runTime, setRunTime] = useState(0);
   useEffect(
     function getRuntime() {
-      for (let i in watchedMovies) {
-        let tempRunTime = watchedMovies[i].runtime.split(" ")[0];
-        console.log(tempRunTime);
-        setRunTime((runTime) => {
-          return runTime + Number(tempRunTime) / 2;
-        });
-      }
+      let tempRuntime = watchedMovies.reduce((acc, cv) => {
+        return acc + Number(cv.runtime.split(" ")[0]);
+      }, 0);
+
+      setRunTime(tempRuntime);
     },
     [watchedMovies]
   );
+
+  function handleRemoveMovie(id) {
+    console.log(id);
+    let tempWatchedMovies = watchedMovies.filter(
+      (movie) => movie.imdbID !== id
+    );
+    setWatchedMovies(tempWatchedMovies);
+  }
 
   return (
     <ul>
@@ -34,6 +42,8 @@ export default function Watched({ watchedMovies }) {
               year={movie.year}
               runtime={movie.runtime}
               rating={movie.currentRating}
+              id={movie.imdbID}
+              handleRemoveMovie={handleRemoveMovie}
             />
           </li>
         );
